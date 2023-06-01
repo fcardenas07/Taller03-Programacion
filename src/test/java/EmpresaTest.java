@@ -14,9 +14,7 @@ class EmpresaTest {
     void setUp() {
         empresa = new Empresa("1234567-1", "direccion", new ArrayList<>());
 
-        Bus bus1 = new Bus("AABB12", "Mercedes", "X123");
-
-        empresa.agregarBus(bus1);
+        empresa.agregarBus(new Bus("AABB12", "Mercedes", "X123"));
         empresa.agregarBus(new Bus("AABB13", "Mercedes", "X123"));
         empresa.agregarBus(new Bus("AABB14", "Mercedes", "X123"));
         empresa.agregarBus(new Bus("AABB15", "Mercedes", "X123"));
@@ -24,6 +22,17 @@ class EmpresaTest {
         empresa.agregarConductor(new Conductor("Juan", "Perez", 1231231231, Licencia.A1));
         empresa.agregarConductor(new Conductor("Jon", "Perez", 1231231232, Licencia.A1));
 
+        empresa.asociarViaje("AABB12",
+                new Viaje("Temuco", "Traiguen", LocalTime.of(20, 0),
+                        LocalTime.of(21, 0),
+                        new ArrayList<>(),
+                        LocalDate.of(2023, 8, 1) ));
+
+        empresa.asociarViaje("AABB13",
+                new Viaje("Temuco", "Traiguen", LocalTime.of(10, 0),
+                        LocalTime.of(22, 0),
+                        new ArrayList<>(),
+                        LocalDate.of(2023, 8, 1) ));
     }
 
     @Test
@@ -66,11 +75,7 @@ class EmpresaTest {
 
         assertEquals(3, buses);
     }
-
-
-    @Test
-    void contarViajesPorDia() {
-    }
+    
 
     @Test
     void asociarViaje() {
@@ -90,4 +95,12 @@ class EmpresaTest {
     }
 
 
+    @Test
+    void filtrarBuses() {
+        ArrayList<Bus> buses = empresa.filtrarBuses("Traiguen", LocalTime.of(9, 0), LocalTime.of(23, 0));
+
+        int size = buses.size();
+
+        assertEquals(2, size);
+    }
 }

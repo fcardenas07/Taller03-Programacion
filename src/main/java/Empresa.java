@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class Empresa {
@@ -52,16 +53,22 @@ public class Empresa {
         return -1;
     }
 
-    public void filtrarBuses(String ciudadDestino, String horaSalida, String horaLlegada) {
-        throw new UnsupportedOperationException();
+    public ArrayList<Bus> filtrarBuses(String ciudadDestino, LocalTime horaSalida, LocalTime horaLlegada) {
+        ArrayList<Bus> busesFiltrados = new ArrayList<>();
+        for (Bus bus : buses) {
+            for (Viaje viaje : bus.getViajes()) {
+                if (ciudadDestino.equals(viaje.getCiudadDestino()) &&
+                        viaje.getHoraSalida().isAfter(horaSalida) &&
+                        viaje.getHoraLlegada().isBefore(horaLlegada)) {
+                    busesFiltrados.add(bus);
+                }
+            }
+        }
+        return busesFiltrados;
     }
 
     public int contarCantidadDeBuses() {
         return buses.size();
-    }
-
-    public int contarViajesPorDia(LocalDate fecha) {
-        throw new UnsupportedOperationException();
     }
 
     public void asociarViaje(String patente, Viaje viaje) {

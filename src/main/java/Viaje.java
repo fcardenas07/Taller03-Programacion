@@ -32,4 +32,16 @@ public class Viaje {
 	public void agregarPasajero(String pasajero) {
 		pasajeros.add(pasajero);
 	}
+
+	public String getCiudadDestino() {
+		return ciudadDestino;
+	}
+
+	public LocalTime getHoraLlegada() {
+		return horaLlegada;
+	}
+
+	public LocalTime getHoraSalida() {
+		return horaSalida;
+	}
 }
