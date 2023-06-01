@@ -4,7 +4,7 @@ public class Bus {
     private final String patente;
     private final String marca;
     private final String modelo;
-    private final ArrayList<Viaje> viajes = new ArrayList<Viaje>();
+    private final ArrayList<Viaje> viajes = new ArrayList<>();
     private Conductor conductor;
 
     public Bus(String patente, String marca, String modelo) {
